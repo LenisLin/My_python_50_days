@@ -60,6 +60,7 @@ def roll_dice(n=2): ## 调用roll_dice()时，如果没有指定实际参数，�
 print(roll_dice(3)) ## 这时候是指定了实际参数为3，即三个色子获得一个点数
 '''
 
+'''
 ## eg2：参数的传递
 def add(a=0,b=0,c=0):
     ## 默认参数a=0,b=0,c=0
@@ -68,15 +69,40 @@ print(add()) ## 返回0，调用了a,b,c为0的默认值
 print(add(1)) ## 返回1，调用了a=1,b=0,c=0
 print(add(1,3)) ## 返回4，调用了a=1,b=3,c=0
 print(add(c=1,b=1,a=2)) ## 当传递的实际参数不按照形式参数来的时候，可以通过形参=实参值来实现乱序调用
+'''
 
 # note:带默认值的参数必须放在不带默认值的参数之后，否则将产生`SyntaxError`错误，
 # 错误消息是：`non-default argument follows default argument`，翻译成中文的意思是“没有默认值的参数放在了带默认值的参数后面”。
 # 我没有试出来
 
+
 ## eg3：可变参数
 ## 可变参数指的是在调用函数时，可以向函数传入0个或任意多个参数
+'''
 def add_2(*args): ## 这里如果args是个数组的话好像挺不错，这时候实现add()就无所谓传入几个参数了
-    sum=0
+    sum=0 ## 上面这个args是一个数组，*这个在C是数组首地址，这里具体是什么后面再复习一下
     for i in args:
-        sum=sum+args
+        sum=sum+i
     return(sum)
+
+print(add_2(1,2,3))
+print(add_2(1,9))
+print(add_2())
+'''
+
+## eg4：模块中的函数
+## 如果在同一个.py文件里面，定义了两个名称相同的函数，就会报错
+## 如果我们在不同的模块里面，比如说module1.py里面定义一个foo()函数，module2.py里面定义另一个foo()函数
+## 我们用import module1 import moduel2，然后再module1.foo()（2类似），进行分别调用就不会冲突
+'''
+import day_7_1
+import day_7_2
+day_7_1.foo()
+day_7_2.foo()
+'''
+## 还有就是import的时候可以用as来起别名，比如说import numpy as nu
+## 或者可以不导入模块，只导入模块中的某个函数，比如说 from day_7_1 import foo ，后面也可以as来起别名
+
+## python的标准库，就类似C的studio.h，但是Python是直接内置了，不需要再额外import
+## 包括一些常见的数学运算函数，如：abs(),sum(),min(),oct()(返回八进制字符串),type()等
+
